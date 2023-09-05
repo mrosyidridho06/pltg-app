@@ -33,6 +33,7 @@
                 </a>
                 <ul class="sub-menu {{ request()->segment(1) == 'laporan' ? 'expand' : '' }}">
                     <li class="{{ request()->segment(2) == 'logsheet' ? 'active' : '' }}"><a href="{{ route('logsheet.index') }}" class="link"><span>Logsheets</span></a></li>
+                    <li class="{{ request()->segment(2) == 'patrol-check' ? 'active' : '' }}"><a href="{{ route('patrol-check.index') }}" class="link"><span>Patrol Check</span></a></li>
                     <li class="{{ request()->segment(2) == 'berita-acara' ? 'active' : '' }}"><a href="{{ route('berita-acara.index') }}" class="link"><span>Berita Acara Shift</span></a></li>
                 </ul>
             </li>
@@ -61,6 +62,18 @@
                 </ul>
             </li>
             @endcan
+            <li class="menu-category">
+                <span class="text-uppercase">Master Data</span>
+            </li>
+            <li class="{{ request()->segment(1) == 'master' ? 'active open' : '' }}">
+                <a href="#" class="main-menu has-dropdown">
+                    <i class="ti-settings"></i>
+                    <span>Master</span>
+                </a>
+                <ul class="sub-menu {{ request()->segment(1) == 'master' ? 'expand' : '' }}">
+                    <li class="{{ request()->segment(2) == 'shift' ? 'active' : '' }}"><a href="{{ route('shift.index') }}" class="link"><span>Shift</span></a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>

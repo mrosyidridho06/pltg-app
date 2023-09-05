@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\BeritaAcaraController;
 use App\Http\Controllers\LogsheetController;
+use App\Http\Controllers\PatrolCheckController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ShiftController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +33,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('/pegawai/permissions', PermissionController::class);
     Route::resource('/pegawai/data', PegawaiController::class);
     Route::resource('/laporan/berita-acara', BeritaAcaraController::class);
+    Route::resource('/laporan/patrol-check', PatrolCheckController::class);
     Route::resource('/laporan/logsheet', LogsheetController::class);
+    Route::resource('/master/shift', ShiftController::class);
 });

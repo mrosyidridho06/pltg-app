@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('berita_acaras', function (Blueprint $table) {
             $table->id();
+            $table->date('tanggal');
+            $table->time('jam');
+            $table->string('informasi');
+            $table->foreignId('shift_id')->constrained('shifts')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });
     }
