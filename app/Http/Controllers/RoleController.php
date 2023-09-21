@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
+use Spatie\Permission\Contracts\Permission;
+use Spatie\Permission\Models\Permission as ModelsPermission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -24,11 +26,13 @@ class RoleController extends Controller
         // }
         $this->authorize('read roles');
 
-        $roles = Role::all();
+        $permissions = ModelsPermission::all();
+
+        $roles = Role::with('permissions')->get();
 
         // dd($roles);
 
-        return view('roles.index', compact('roles'));
+        return view('roles.index', compact('roles', 'permissions'));
     }
 
     /**

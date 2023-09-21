@@ -181,6 +181,13 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\HtmlServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -209,6 +216,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

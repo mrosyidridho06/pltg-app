@@ -33,7 +33,7 @@
                                         <div class="mb-3">
                                             <label for="shift" class="form-label">Shift</label>
                                             <select class="form-select mb-3" aria-label="Default select example" name="shift_id">
-                                                <option selected>Pilih Shift</option>
+                                                <option selected value="">Pilih Shift</option>
                                                 @foreach ($shifts as $shift)
                                                     <option value="{{ $shift->id }}">{{ $shift->nama_shift }} ( {{ $shift->shift_awal }} - {{ $shift->shift_akhir }} )</option>
                                                 @endforeach
@@ -74,7 +74,7 @@
             </div>
         @endif
         <div class="card-body">
-            <table class="table">
+            {{-- <table class="table dt-responsive display" id="tableBA">
                 <th>No.</th>
                 <th>Nama</th>
                 <th>Informasi</th>
@@ -93,7 +93,11 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table> --}}
+            {{ $dataTable->table() }}
         </div>
     </div>
 @endsection
+@push('js')
+    {{ $dataTable->scripts() }}
+@endpush

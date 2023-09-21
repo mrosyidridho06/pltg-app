@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('logsheets', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor_dokumen');
+            $table->date('tanggal_terbit');
             $table->timestamps();
         });
     }

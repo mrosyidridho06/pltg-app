@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\BeritaAcaraDataTable;
 use App\Models\Shift;
 use App\Models\BeritaAcara;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BeritaAcaraController extends Controller
 {
@@ -17,14 +19,14 @@ class BeritaAcaraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(BeritaAcaraDataTable $dataTable)
     {
         $this->authorize('create beritaacara', 'read beritaacara');
 
         $beritaacaras = BeritaAcara::all();
         $shifts = Shift::all();
 
-        return view('berita_acara.index', compact('beritaacaras', 'shifts'));
+        return $dataTable->render('laporan.berita_acara.index', compact('shifts', 'beritaacaras'));
     }
 
     /**
@@ -62,7 +64,9 @@ class BeritaAcaraController extends Controller
             'informasi' => $request->informasi
         ]);
 
-        return redirect()->with('success');
+        Alert::toast('Data Berhasil Ditambah', 'success');
+        return redirect()->back();
+        // return redirect()->with('success');
 
     }
 

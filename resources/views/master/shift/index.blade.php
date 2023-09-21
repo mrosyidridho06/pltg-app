@@ -3,7 +3,7 @@
     <div class="title">
         Shift
     </div>
-    @can('create roles')
+    @can('create master')
         <button class="btn mb-2 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Tambah Shift</button>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
@@ -50,27 +50,124 @@
             </div>
         </div>
     @endcan
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <table class="table">
+    <div class="card">
+        <div class="card-body">
+            <table class="table" id="myTable">
+                <thead>
                     <th>No.</th>
                     <th>Nama Shift</th>
                     <th>Shift Awal</th>
                     <th>Shift Akhir</th>
-                    <tbody>
-                        @foreach ($shifts as $shift)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $shift->nama_shift }}</td>
-                            <td>{{ Carbon\Carbon::parse($shift->shift_awal)->translatedFormat('H:i') }}</td>
-                            <td>{{ Carbon\Carbon::parse($shift->shift_akhir)->translatedFormat('H:i') }}</td>
-                            <td></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    @foreach ($shifts as $shift)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $shift->nama_shift }}</td>
+                        <td>{{ Carbon\Carbon::parse($shift->shift_awal)->translatedFormat('H:i') }}</td>
+                        <td>{{ Carbon\Carbon::parse($shift->shift_akhir)->translatedFormat('H:i') }}</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button"
+                                    class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="ti-settings"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                    <a href="javascript:void(0)" id="btn-edit-shift" data-id="{{ $shift->id }}" class="btn btn-primary btn-sm dropdown-item-text">Edit</a>
+                                    <a href="{{ route('shift.destroy', $shift->id) }}" data-confirm-delete="true" class="btn btn-danger btn-sm dropdown-item-text">Hapus</a>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+
         </div>
     </div>
 @endsection
+@push('js')
+<script>
+    const table = new DataTable('#myTable', {
+        // ajax: "data.json",
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0
+            },
+            {
+                searchable: false,
+                orderable: false,
+                targets: 2
+            }
+        ],
+        language: {
+            "searchPlaceholder": "Cari",
+            "zeroRecords": "Tidak ditemukan data yang sesuai",
+            "emptyTable": "Tidak terdapat data di tabel"
+        },
+        order: [[1, 'asc']]
+    });
+
+    table
+        .on('order.dt search.dt', function () {
+            let i = 1;
+
+            table
+                .cells(null, 0, { search: 'applied', order: 'applied' })
+                .every(function (cell) {
+                    this.data(i++);
+                });
+        })
+        .draw();
+</script>
+<script>
+    const modal = new bootstrap.Modal($('#modalEdit'))
+    $('#myTable').on('click', '#btn-edit-shift', function(){
+
+        let data = $(this).data();
+        let id = data.id
+        // let jenis = data.jenis
+
+        $.ajax({
+            method: 'get',
+            url: `{{ url('master/shift/') }}/${id}/edit`,
+            success: function(res){
+                $('#modalEdit').find('.modal-dialog').html(res)
+                modal.show()
+                store()
+            }
+        })
+        function store(){
+            $(".formAction").on('submit', function(e){
+                e.preventDefault();
+                $.ajax({
+                    method: 'POST',
+                    url: `{{ url('master/shift/') }}/${id}`,
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(res){
+                        modal.hide()
+                    },
+                    // error: function(res){
+
+                    // }
+                })
+            })
+        }
+
+        // console.log(data);
+
+    })
+
+    var myModal = document.getElementById('modalEdit')
+</script>
+@endpush

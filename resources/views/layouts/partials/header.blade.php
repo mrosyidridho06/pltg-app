@@ -2,13 +2,7 @@
     <div class="header-wrapper">
         <div class="header-left">
             <div class="sidebar-toggle action-toggle"><i class="fas fa-bars"></i></div>
-            <a href="https://time.is/Samarinda" id="time_is_link" rel="nofollow" style="font-size:12px"></a>
-            <span id="Samarinda_z42b" style="font-size:12px"></span>
-            <script src="//widget.time.is/en.js"></script>
-            <script>
-                time_is_widget.init({Samarinda_z42b:{template:"TIME<br>DATE", time_format:"12hours:minutes:secondsAMPM", date_format:"dayname, monthname dnum, year"}});
-            </script>
-            <div id="time"></div>
+
         </div>
         <div class="header-content">
 
@@ -65,7 +59,7 @@
                         <span></span>
                         <div>{{ Auth::user()->name }}</div>
                     </div>
-                    <img class="img-user" src="../assets/images/avatar1.png" alt="user"srcset="">
+                    <img class="img-user" src="{{ asset('assets/images/avatar1.png') }}" alt="user"srcset="">
                 </a>
                 <ul class="dropdown-menu small">
                     <!-- <li class="menu-header">

@@ -25,6 +25,13 @@ body {
   color: #625f6e;
 }
 
+.bg-login {
+    background-image: url("../images/bg-login.jpg");
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+}
+
 @-webkit-keyframes rotating {
   from {
     transform: rotate(0deg);

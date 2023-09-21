@@ -75,6 +75,18 @@ class RolePermissionSeeder extends Seeder
         Permission::create(['name' => 'read users']);
         Permission::create(['name' => 'create users']);
 
+        // management master
+        Permission::create(['name' => 'edit master']);
+        Permission::create(['name' => 'delete master']);
+        Permission::create(['name' => 'read master']);
+        Permission::create(['name' => 'create master']);
+
+        // management checklist mesin
+        Permission::create(['name' => 'edit checklist mesin']);
+        Permission::create(['name' => 'delete checklist mesin']);
+        Permission::create(['name' => 'read checklist mesin']);
+        Permission::create(['name' => 'create checklist mesin']);
+
         // create roles and assign created permissions
 
         // this can be done as separate statements

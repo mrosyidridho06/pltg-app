@@ -14,7 +14,7 @@ class PatrolCheckController extends Controller
      */
     public function index()
     {
-        return view('patrol_check.index');
+        return view('laporan.patrol_check.index');
     }
 
     /**
