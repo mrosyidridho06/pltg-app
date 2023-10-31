@@ -75,9 +75,15 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit($id)
     {
-        //
+        $roles = Role::with('permissions')->find($id);
+
+        // dd($roles);
+
+        $permissions = ModelsPermission::all();
+
+        return view('roles.edit', compact('roles', 'permissions'));
     }
 
     /**

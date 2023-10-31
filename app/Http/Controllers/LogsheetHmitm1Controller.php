@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisLogsheet;
 use App\Models\LogsheetHmitm1;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class LogsheetHmitm1Controller extends Controller
      */
     public function index()
     {
-        //
+        $jl = JenisLogsheet::all();
+
+        return view('laporan.hmitm1.index', compact('jl'));
     }
 
     /**

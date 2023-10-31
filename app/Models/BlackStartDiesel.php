@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class BlackStartDiesel extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'tanggal', 'jam', 'informasi', 'shift_id', 'user_id'
+    ];
+
 }

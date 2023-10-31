@@ -14,7 +14,7 @@ class PenyulangPembangkitController extends Controller
      */
     public function index()
     {
-        //
+        return view('management_document.data_penyulangpembangkit.index');
     }
 
     /**

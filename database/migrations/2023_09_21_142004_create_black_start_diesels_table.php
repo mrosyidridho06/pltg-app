@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('black_start_diesels', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_alat');
+            $table->string('penunjukan_meter');
             $table->timestamps();
         });
     }

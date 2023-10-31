@@ -14,7 +14,7 @@ class ChecklistFirePumpController extends Controller
      */
     public function index()
     {
-        //  
+        return view('management_document.firepump.index');
     }
 
     /**

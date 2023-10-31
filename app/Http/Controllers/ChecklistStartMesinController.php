@@ -14,7 +14,7 @@ class ChecklistStartMesinController extends Controller
      */
     public function index()
     {
-        //
+        return view('laporan.checklist_startmesin.index');
     }
 
     /**

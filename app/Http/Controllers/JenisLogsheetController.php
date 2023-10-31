@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\JenisLogsheet;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,6 +23,9 @@ class JenisLogsheetController extends Controller
         $this->authorize('create logsheet', 'read logsheet');
 
         $jenisLogsheet = JenisLogsheet::all();
+        $title = 'Delete Jenis Logsheet!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
 
         return view('master.jenis_logsheet.index', compact('jenisLogsheet'));
         // return $dataTable->render('master.jenis_logsheet.index');
@@ -99,6 +103,13 @@ class JenisLogsheetController extends Controller
      */
     public function destroy(JenisLogsheet $jenisLogsheet)
     {
-        //
+        try {
+            $jenisLogsheet->delete();
+            alert()->success('Success','Your file has been deleted.');
+            return redirect()->back();
+        }catch (Exception $e){
+            alert()->error('Error','Data terpakai di laporan');
+            return redirect()->back();
+        }
     }
 }

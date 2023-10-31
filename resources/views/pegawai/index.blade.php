@@ -4,13 +4,12 @@
         Data Pegawai
     </div>
     @can('create users')
-    {{-- <a href="{{ route('register') }}"><button type="button" class="btn mb-2 btn-primary">Tambah Pegawai</button></a> --}}
-    <button class="btn mb-3 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Tambah Pegawai</button>
+    <button class="btn mb-3 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Tambah Data</button>
         <div class="modal fade myModal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Pegawai</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Form Data Pegawai</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

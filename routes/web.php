@@ -31,7 +31,9 @@ use App\Http\Controllers\PenyulangPembangkitController;
 */
 
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+]);
 
 // Route::get('/', function () {
 //     return view('welcome');

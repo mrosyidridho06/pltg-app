@@ -7,7 +7,7 @@
         <div class="header-content">
 
             <div class="theme-switch-icon"></div>
-            <div class="notification dropdown">
+            {{-- <div class="notification dropdown">
                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="far fa-bell"></i>
                     <span class="badge">12</span>
@@ -52,7 +52,7 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
             <div class="dropdown dropdown-menu-end">
                 <a href="#" class="user-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="label">
@@ -66,11 +66,11 @@
                         <a class="dropdown-item" href="#">Notifikasi</a>
                     </li> -->
                     <li class="menu-content ps-menu">
-                        <a href="#">
+                        {{-- <a href="#">
                             <div class="description">
                                 <i class="ti-user"></i> Profile
                             </div>
-                        </a>
+                        </a> --}}
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">

@@ -34,7 +34,7 @@
                 </a>
                 <ul class="sub-menu {{ request()->segment(1) == 'laporan' ? 'expand' : '' }}">
                     <li class="{{ request()->segment(2) == 'logsheet-hmitm1' ? 'active' : '' }}"><a href="{{ route('logsheet-hmitm1.index') }}" class="link"><span>Logsheets hmi tm#1</span></a></li>
-                    <li class="{{ request()->segment(2) == 'logsheet-hmitm2' ? 'active' : '' }}"><a href="{{ route('logsheet-hmitm1.index') }}" class="link"><span>Logsheets hmi tm#2</span></a></li>
+                    <li class="{{ request()->segment(2) == 'logsheet-hmitm2' ? 'active' : '' }}"><a href="{{ route('logsheet-hmitm2.index') }}" class="link"><span>Logsheets hmi tm#2</span></a></li>
                     <li class="{{ request()->segment(2) == 'patrol-check' ? 'active' : '' }}"><a href="{{ route('patrol-check.index') }}" class="link"><span>Logsheets Patrol Check</span></a></li>
                 </ul>
             </li>
@@ -58,12 +58,12 @@
             <li class="menu-category">
                 <span class="text-uppercase">Management</span>
             </li>
-            <li>
+            <li class="{{ request()->segment(1) == 'document' ? 'active open' : '' }}">
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-files"></i>
                     <span>Document</span>
                 </a>
-                <ul class="sub-menu">
+                <ul class="sub-menu {{ request()->segment(1) == 'document' ? 'expand' : '' }}">
                     <li class="{{ request()->segment(2) == 'penyulang-pembangkit' ? 'active' : '' }}"><a href="{{ route('penyulang-pembangkit.index') }}" class="link"><span>Penyulang dan Pembangkit</span></a></li>
                     <li class="{{ request()->segment(2) == 'bsd' ? 'active' : '' }}"><a href="{{ route('bsd.index') }}" class="link"><span>Black Start Diesel</span></a></li>
                     <li class="{{ request()->segment(2) == 'firepump' ? 'active' : '' }}"><a href="{{ route('firepump.index') }}" class="link"><span>Fire Pump</span></a></li>
@@ -81,7 +81,7 @@
                 </a>
                 <ul class="sub-menu {{ request()->segment(1) == 'pegawai' ? 'expand' : '' }}">
                     <li class="{{ request()->segment(2) == 'roles' ? 'active' : '' }}"><a href="{{ route('roles.index') }}" class="link"><span>Role Pegawai</span></a></li>
-                    <li class="{{ request()->segment(2) == 'permissions' ? 'active' : '' }}"><a href="{{ route('permissions.index') }}" class="link"><span>Permissions Pegawai</span></a></li>
+                    {{-- <li class="{{ request()->segment(2) == 'permissions' ? 'active' : '' }}"><a href="{{ route('permissions.index') }}" class="link"><span>Permissions Pegawai</span></a></li> --}}
                     <li class="{{ request()->segment(2) == 'data' ? 'active' : '' }}"><a href="{{ route('data.index') }}" class="link"><span>Data Pegawai</span></a></li>
                 </ul>
             </li>

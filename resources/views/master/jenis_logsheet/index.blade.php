@@ -4,12 +4,12 @@
         Jenis Logsheet
     </div>
     @can('create beritaacara')
-        <button class="btn mb-3 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Tambah Master Jenis Logsheet</button>
+        <button class="btn mb-3 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Tambah Data</button>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Master Jenis Logsheet</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Form Data Jenis Logsheet</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -70,7 +70,7 @@
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                     <li><a class="dropdown-item" href="#">Edit</a></li>
-                                    <li><a class="dropdown-item" href="#">Hapus</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('jenis-logsheet.destroy', $jl->id) }}" data-confirm-delete="true">Hapus</a></li>
                                 </ul>
                             </div>
                         </td>

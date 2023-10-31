@@ -1,19 +1,19 @@
 @extends('layouts.app')
 @section('content')
     <div class="title">
-        Patrol Check
+        Penyulang dan Pembangkit
     </div>
     @can('create beritaacara')
-    <button class="btn mb-3 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Form Data Patrol Check</button>
+    <button class="btn mb-3 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Tambah Data</button>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Data</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Form Data Penyulang dan Pembangkit</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('patrol-check.store') }}" method="POST">
+                        <form action="{{ route('penyulang-pembangkit.store') }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="row">

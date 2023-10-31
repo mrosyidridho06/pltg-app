@@ -4,14 +4,14 @@
         Roles Pegawai
     </div>
     @can('create roles')
-    <button class="btn mb-2 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Tambah Role</button>
+    <button class="btn mb-2 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Tambah Data</button>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Role</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Form Data Role Pegawai</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -77,7 +77,7 @@
                                     <i class="ti-settings"></i>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                    <li><a class="dropdown-item" id="btn-edit" href="#" data-id="{{ $role->id }}">Edit</a></li>
                                     <li><a class="dropdown-item" href="#">Hapus</a></li>
                                 </ul>
                             </div>
@@ -88,8 +88,55 @@
             </table>
         </div>
     </div>
+    <div class="modal fade" id="modalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+
+        </div>
+    </div>
 @endsection
 @push('js')
+<script>
+    const modal = new bootstrap.Modal($('#modalEdit'))
+    $('#myTable').on('click', '#btn-edit', function(){
+
+        let data = $(this).data();
+        let id = data.id
+        // let jenis = data.jenis
+
+        $.ajax({
+            method: 'get',
+            url: `{{ url('pegawai/roles/') }}/${id}/edit`,
+            success: function(res){
+                $('#modalEdit').find('.modal-dialog').html(res)
+                modal.show()
+                store()
+            }
+        })
+        function store(){
+            $(".formAction").on('submit', function(e){
+                e.preventDefault();
+                $.ajax({
+                    method: 'POST',
+                    url: `{{ url('pegawai/roles/') }}/${id}`,
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(res){
+                        modal.hide()
+                    },
+                    // error: function(res){
+
+                    // }
+                })
+            })
+        }
+
+        // console.log(data);
+
+    })
+
+    var myModal = document.getElementById('modalEdit')
+</script>
 <script>
     const table = new DataTable('#myTable', {
         columnDefs: [
@@ -109,7 +156,6 @@
             "zeroRecords": "Tidak ditemukan data yang sesuai",
             "emptyTable": "Tidak terdapat data di tabel"
         },
-        order: [[1, 'asc']]
     });
 
     table

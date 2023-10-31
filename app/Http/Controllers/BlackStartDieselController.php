@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BlackStartDiesel;
+use App\Models\BSDdetail;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\JenisLogsheet;
+use App\Models\BlackStartDiesel;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BlackStartDieselController extends Controller
 {
@@ -14,7 +18,10 @@ class BlackStartDieselController extends Controller
      */
     public function index()
     {
-        //
+        $jl = JenisLogsheet::all();
+        $bsd = BSDdetail::get();
+
+        return view('management_document.bsd.index', compact('jl', 'bsd'));
     }
 
     /**
@@ -35,7 +42,27 @@ class BlackStartDieselController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // dd($request);
+        $request->validate([
+            'tanggal_terbit' => ['required', 'date'],
+            'nomor_dokumen' => ['required', 'string'],
+        ]);
+
+        try {
+            BSDdetail::create([
+                'tanggal_terbit' => $request->tanggal_terbit,
+                'slug' => Str::slug($request->nomor_dokumen),
+                'nomor_dokumen' => $request->nomor_dokumen,
+            ]);
+
+            Alert::toast('Data Berhasil Ditambah', 'success');
+            return redirect()->back();
+        } catch(\Exception $e){
+            Alert::toast('Nomor Dokumen Sudah ada', 'error');
+            return redirect()->back();
+        }
+
     }
 
     /**
@@ -44,9 +71,12 @@ class BlackStartDieselController extends Controller
      * @param  \App\Models\BlackStartDiesel  $blackStartDiesel
      * @return \Illuminate\Http\Response
      */
-    public function show(BlackStartDiesel $blackStartDiesel)
+    public function show($slug)
     {
-        //
+        $bsd = BSDdetail::where('nomor_dokumen', $slug)->first();
+        // dd($bsd);
+
+        return view('management_document.bsd.show', compact('bsd'));
     }
 
     /**
@@ -79,6 +109,16 @@ class BlackStartDieselController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(BlackStartDiesel $blackStartDiesel)
+    {
+        //
+    }
+
+    public function showDetail(BSDdetail $bsddetail)
+    {
+        //
+    }
+
+    public function updateDetail(Request $request, BSDdetail $bsddetail)
     {
         //
     }

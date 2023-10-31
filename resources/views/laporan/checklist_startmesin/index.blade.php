@@ -1,15 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <div class="title">
-        Patrol Check
+        Checklist Sebelum Start Mesin
     </div>
     @can('create beritaacara')
-    <button class="btn mb-3 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Form Data Patrol Check</button>
+    <button class="btn mb-3 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Tambah Data</button>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Data</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Form Data Checklist Sebelum Start Mesin</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
