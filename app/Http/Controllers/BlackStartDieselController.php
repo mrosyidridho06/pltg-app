@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\JenisLogsheet;
 use App\Models\BlackStartDiesel;
+use App\Models\BSDIsiDetail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BlackStartDieselController extends Controller
@@ -31,7 +32,7 @@ class BlackStartDieselController extends Controller
      */
     public function create()
     {
-        //
+        return view('management_document.bsd.create');
     }
 
     /**
@@ -41,6 +42,30 @@ class BlackStartDieselController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    {
+
+        // dd($request);
+        $request->validate([
+            'nama_alat' => ['required', 'string'],
+            'penunjukan_meter' => ['required', 'string'],
+        ]);
+
+        BlackStartDiesel::create([
+            'nama_alat' => $request->nama_alat,
+            'penunjukan_meter' => $request->penunjukan_meter,
+        ]);
+
+        Alert::toast('Data Berhasil Ditambah', 'success');
+        return redirect()->back();
+        // try {
+        // } catch(\Exception $e){
+        //     Alert::toast('Nama alat sudah ada', 'error');
+        //     return redirect()->back();
+        // }
+
+    }
+
+    public function storeDetail(Request $request)
     {
 
         // dd($request);
@@ -65,6 +90,26 @@ class BlackStartDieselController extends Controller
 
     }
 
+    public function storeIsi(Request $request){
+
+        $request->validate([
+            'siap_operasi' => ['required'],
+            'gangguan' => ['required'],
+            'keterangan' => 'nullable',
+            'details' => 'required',
+            'bsd' => 'required',
+        ]);
+
+        BSDIsiDetail::create([
+            'siap_operasi' => $request->siap_operasi,
+            'gangguan' => $request->gangguan,
+            'keterangan' => $request->keterangan,
+            'siap_operasi' => $request->siap_operasi,
+            'bsd_details_id' => $request->details,
+            'black_start_details_id' => $request->bsd,
+        ]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -74,9 +119,9 @@ class BlackStartDieselController extends Controller
     public function show($slug)
     {
         $bsd = BSDdetail::where('nomor_dokumen', $slug)->first();
-        // dd($bsd);
+        $based = BlackStartDiesel::get();
 
-        return view('management_document.bsd.show', compact('bsd'));
+        return view('management_document.bsd.show', compact('bsd', 'based'));
     }
 
     /**

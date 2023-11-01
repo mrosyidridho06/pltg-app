@@ -9,8 +9,11 @@ class BlackStartDiesel extends Model
 {
     use HasFactory;
 
+    protected $table = 'black_start_diesels';
+
     protected $fillable = [
-        'tanggal', 'jam', 'informasi', 'shift_id', 'user_id'
+        'nama_alat',
+        'penunjukan_meter'
     ];
 
 }

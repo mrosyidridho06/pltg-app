@@ -8,10 +8,14 @@
             <table>
                 <tr>
                     <th>Nomor Dokumen</th>
+                    <td>{{ $bsd->nomor_dokumen }}</td>
+                </tr>
+                <tr style="margin: 10%">
+                    <th>Nomor Dokumen</th>
+                    <td>{{ $bsd->nomor_dokumen }}</td>
                 </tr>
                 <tbody>
                     <tr>
-                        <td>{{ $bsd->nomor_dokumen }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -34,7 +38,18 @@
                         <th style="text-align: center">Gangguan</th>
                     </tr>
                     <tbody>
-
+                        @foreach ($based as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->nama_alat }}</td>
+                            <td>{{ $item->penunjukan_meter }}</td>
+                            <form>
+                            <td><input type="text" class="form-control" value="{{ $item->id }}"></td>
+                            <td><input type="text" class="form-control" value="{{ $bsd->id }}"></td>
+                            <td><input type="text" class="form-control"></td>
+                            </form>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -19,9 +19,6 @@ return new class extends Migration
             $table->string('slug');
             $table->date('tanggal_terbit');
             $table->string('revisi')->nullable();
-            $table->string('siap_operasi')->nullable();
-            $table->string('gangguan')->nullable();
-            $table->string('keterangan')->nullable();
             $table->string('rh_sebelum')->nullable();
             $table->string('rh_setelah')->nullable();
             $table->string('flowmeter_bbm')->nullable();
