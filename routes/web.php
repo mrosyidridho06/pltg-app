@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('/checklist-mesin/stop', ChecklistStopMesinController::class);
     Route::resource('/document/bsd', BlackStartDieselController::class);
     Route::post('/bsddetail', [BlackStartDieselController::class, 'storeDetail'])->name('bsddetail');
+    Route::post('/isibsd', [BlackStartDieselController::class, 'storeIsi'])->name('isibsd');
     Route::resource('/document/firepump', ChecklistFirePumpController::class);
     Route::resource('/document/penyulang-pembangkit', PenyulangPembangkitController::class);
     Route::resource('/master/shift', ShiftController::class);

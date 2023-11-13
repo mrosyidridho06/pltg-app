@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\BSDdetail;
 use Illuminate\Support\Str;
+use App\Models\BSDIsiDetail;
 use Illuminate\Http\Request;
 use App\Models\JenisLogsheet;
 use App\Models\BlackStartDiesel;
-use App\Models\BSDIsiDetail;
+use Illuminate\Support\Arr;
 use RealRashid\SweetAlert\Facades\Alert;
+use Symfony\Component\Console\Input\Input;
+use Carbon\Carbon;
 
 class BlackStartDieselController extends Controller
 {
@@ -32,7 +35,9 @@ class BlackStartDieselController extends Controller
      */
     public function create()
     {
-        return view('management_document.bsd.create');
+        $alat = BlackStartDiesel::get();
+
+        return view('management_document.bsd.create', compact('alat '));
     }
 
     /**
@@ -92,22 +97,43 @@ class BlackStartDieselController extends Controller
 
     public function storeIsi(Request $request){
 
+
         $request->validate([
-            'siap_operasi' => ['required'],
-            'gangguan' => ['required'],
-            'keterangan' => 'nullable',
-            'details' => 'required',
-            'bsd' => 'required',
+            'siap_operasi.*' => 'required',
+            'gangguan.*' => 'required',
+            'keterangan.*' => 'nullable',
+            'bsd_id' => 'required',
+            'isi_id' => 'required',
         ]);
 
-        BSDIsiDetail::create([
-            'siap_operasi' => $request->siap_operasi,
-            'gangguan' => $request->gangguan,
-            'keterangan' => $request->keterangan,
-            'siap_operasi' => $request->siap_operasi,
-            'bsd_details_id' => $request->details,
-            'black_start_details_id' => $request->bsd,
-        ]);
+        $arr = $request->all();
+
+        $data = $arr['bsd_id'];
+        $siap = $arr['siap_operasi'];
+        $gang = $arr['gangguan'];
+        $ket = $arr['keterangan'];
+        $isi = $arr['isi_id'];
+
+        $finalArray = array();
+        // dd($arr);
+        foreach($data as $key=>$item){
+            array_push($finalArray, array(
+                'siap_operasi'=> $siap[$key],
+                'gangguan'=> $gang[$key],
+                'keterangan' => $ket[$key],
+                'bsd_details_id' => $isi[$key],
+                'black_start_diesels_id' => $data[$key],
+                "created_at"=> Carbon::now(),
+                "updated_at"=> Carbon::now()
+                )
+            );
+        }
+        // dd($finalArray);
+
+        BSDIsiDetail::insert($finalArray);
+
+        Alert::toast('Data Berhasil Ditambah', 'success');
+        return redirect()->back();
     }
 
     /**

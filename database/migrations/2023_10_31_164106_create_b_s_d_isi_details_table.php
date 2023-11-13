@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('b_s_d_isi_details');
+        Schema::dropIfExists('bsd_isidetails');
     }
 };

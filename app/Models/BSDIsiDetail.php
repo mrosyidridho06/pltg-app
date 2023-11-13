@@ -9,13 +9,13 @@ class BSDIsiDetail extends Model
 {
     use HasFactory;
 
-    protected $table = 'bsd_isidetail';
+    protected $table = 'bsd_isidetails';
 
     protected $fillable = [
+        'black_start_diesels_id',
+        'bsd_details_id',
         'siap_operasi',
         'gangguan',
-        'keterangan',
-        'bsd_details_id',
-        'black_start_diesels_id'
+        'keterangan'
     ];
 }
