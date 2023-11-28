@@ -58,7 +58,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->nomor_dokumen }}</td>
                             <td>{{ $item->tanggal_terbit }}</td>
-                            <td><a class="button-sm" href="{{ route('bsd.show', $item->nomor_dokumen) }}" type="button" target="_blank" class="btn btn-primary"><i class="ti-eye"></i> Print</a></td>
+                            <td><a class="btn btn-primary button-sm" href="{{ route('bsd.show', $item->nomor_dokumen) }}" type="button" target="_blank" class="btn btn-primary"><i class="ti-eye"></i> View</a></td>
                         </tr>
                         @endforeach
                     </tbody>

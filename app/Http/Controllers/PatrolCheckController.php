@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\PatrolCheck;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\PatrolCheckDetail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PatrolCheckController extends Controller
 {
@@ -14,7 +17,9 @@ class PatrolCheckController extends Controller
      */
     public function index()
     {
-        return view('laporan.patrol_check.index');
+        $patrol = PatrolCheckDetail::get();
+
+        return view('laporan.patrol_check.index', compact('patrol'));
     }
 
     /**
@@ -24,7 +29,8 @@ class PatrolCheckController extends Controller
      */
     public function create()
     {
-        //
+        $ptk = PatrolCheck::get();
+        return view('laporan.patrol_check.create', compact('ptk'));
     }
 
     /**
@@ -35,7 +41,64 @@ class PatrolCheckController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'nomor' => 'required',
+            'parameter' => ['required', 'string'],
+            'satuan' => 'required',
+        ]);
+
+        PatrolCheck::create([
+            'nomor' => $request->nomor,
+            'parameter' => $request->parameter,
+            'satuan' => $request->satuan,
+        ]);
+
+        Alert::toast('Data Berhasil Ditambah', 'success');
+        return redirect()->back();
+    }
+
+    public function storeDetail(Request $request)
+    {
+
+        $request->validate([
+            'tanggal_terbit' => 'required',
+            'nomor_dokumen' => ['required', 'string'],
+        ]);
+
+        try {
+            PatrolCheckDetail::create([
+                'tanggal_terbit' => $request->tanggal_terbit,
+                'slug' => Str::slug($request->nomor_dokumen),
+                'nomor_dokumen' => $request->nomor_dokumen,
+            ]);
+
+            Alert::toast('Data Berhasil Ditambah', 'success');
+            return redirect()->back();
+        } catch(\Exception $e){
+            Alert::toast('Nomor Dokumen Sudah ada', 'error');
+            return redirect()->back();
+        }
+
+        Alert::toast('Data Berhasil Ditambah', 'success');
+        return redirect()->back();
+    }
+
+    public function storeIsiDetail(Request $request)
+    {
+
+        $request->validate([
+            'tanggal_terbit' => 'required',
+            'nomor_dokumen' => ['required', 'string'],
+        ]);
+
+        PatrolCheckDetail::create([
+            'tanggal_terbit' => $request->tanggal_terbit,
+            'nomor_dokumen' => $request->nomor_dokumen,
+        ]);
+
+        Alert::toast('Data Berhasil Ditambah', 'success');
+        return redirect()->back();
     }
 
     /**
@@ -47,6 +110,14 @@ class PatrolCheckController extends Controller
     public function show(PatrolCheck $patrolCheck)
     {
         //
+    }
+
+    public function isi($slug)
+    {
+        $patrol = PatrolCheck::orderBy('nomor', 'asc')->get();
+        $patroldetail = PatrolCheckDetail::where('nomor_dokumen', $slug)->first();
+
+        return view('laporan.patrol_check.isi', compact('patrol', 'patroldetail'));
     }
 
     /**

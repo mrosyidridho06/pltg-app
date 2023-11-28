@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('checklist_stop_mesins', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor');
+            $table->string('area');
+            $table->string('target');
             $table->timestamps();
         });
     }

@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function(){
     Route::resource('/pegawai/data', PegawaiController::class);
     Route::resource('/berita-acara', BeritaAcaraController::class);
     Route::resource('/laporan/patrol-check', PatrolCheckController::class);
+    Route::post('/patroldetail', [PatrolCheckController::class, 'storeDetail'])->name('patroldetail');
+    Route::post('/patrolisi', [PatrolCheckController::class, 'storeIsiDetail'])->name('patrolisi');
+    Route::get('/isipatrol/{slug}', [PatrolCheckController::class, 'isi'])->name('isipatrol');
     Route::resource('/laporan/logsheet-hmitm1', LogsheetHmitm1Controller::class);
     Route::resource('/laporan/logsheet-hmitm2', LogsheetHmitm2Controller::class);
     Route::resource('/laporan/logsheet', LogsheetController::class);

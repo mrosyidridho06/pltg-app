@@ -35,7 +35,7 @@
                 <ul class="sub-menu {{ request()->segment(1) == 'laporan' ? 'expand' : '' }}">
                     <li class="{{ request()->segment(2) == 'logsheet-hmitm1' ? 'active' : '' }}"><a href="{{ route('logsheet-hmitm1.index') }}" class="link"><span>Logsheets hmi tm#1</span></a></li>
                     <li class="{{ request()->segment(2) == 'logsheet-hmitm2' ? 'active' : '' }}"><a href="{{ route('logsheet-hmitm2.index') }}" class="link"><span>Logsheets hmi tm#2</span></a></li>
-                    <li class="{{ request()->segment(2) == 'patrol-check' ? 'active' : '' }}"><a href="{{ route('patrol-check.index') }}" class="link"><span>Logsheets Patrol Check</span></a></li>
+                    <li class="{{ request()->segment(2) == 'patrol-check' ? 'active' : '' }}"><a href="{{ route('patrol-check.index') }}" class="link"><span>Checklist Patrol Check</span></a></li>
                 </ul>
             </li>
             <li class="{{ request()->segment(1) == 'checklist-mesin' ? 'active open' : '' }}">

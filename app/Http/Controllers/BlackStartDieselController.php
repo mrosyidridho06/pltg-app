@@ -37,7 +37,7 @@ class BlackStartDieselController extends Controller
     {
         $alat = BlackStartDiesel::get();
 
-        return view('management_document.bsd.create', compact('alat '));
+        return view('management_document.bsd.create', compact('alat'));
     }
 
     /**
@@ -146,8 +146,10 @@ class BlackStartDieselController extends Controller
     {
         $bsd = BSDdetail::where('nomor_dokumen', $slug)->first();
         $based = BlackStartDiesel::get();
+        $bsdisi = BSDIsiDetail::where('bsd_details_id', $bsd->id)->get();
+        // dd($bsdisi);
 
-        return view('management_document.bsd.show', compact('bsd', 'based'));
+        return view('management_document.bsd.show', compact('bsd', 'based', 'bsdisi'));
     }
 
     /**

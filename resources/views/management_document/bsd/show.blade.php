@@ -46,10 +46,15 @@
                             <td>{{ $item->nama_alat }}</td>
                             <td>{{ $item->penunjukan_meter }}</td>
                             <form action="{{ route('isibsd') }}" method="POST">
-                            @csrf
+                                @csrf
                             <td>
+                                @if ($bsdisi->count() == 0)
                                 <input type="text" name="siap_operasi[]" class="form-control">
                                 <input type="hidden" name="bsd_id[]" class="form-control" value="{{ $item->id }}">
+                                @endif
+                                @foreach ($bsdisi as $itembs)
+                                <input type="text" name="siap_operasi" class="form-control" value="{{ $itembs->siap_operasi }}">
+                                @endforeach
                             </td>
                             <td>
                                 <input type="text" name="gangguan[]" class="form-control">
@@ -60,6 +65,19 @@
                             </td>
                             <td>
                             </td>
+                            {{-- @foreach ($bsdisi as $itembsd)
+                            <tr>
+                                <td>
+                                    <input type="text" name="siap_operasi" class="form-control" value="{{ $itembsd->siap_operasi }}">
+                                </td>
+                                <td>
+                                    <input type="text" name="gangguan" class="form-control" value="{{ $itembsd->gangguan }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="{{ $itembsd->keterangan }}">
+                                </td>
+                            </tr>
+                            @endforeach --}}
                         </tr>
                         @endforeach
                     </tbody>

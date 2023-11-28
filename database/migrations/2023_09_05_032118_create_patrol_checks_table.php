@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('patrol_checks', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor');
+            $table->string('parameter');
+            $table->string('satuan');
             $table->timestamps();
         });
     }

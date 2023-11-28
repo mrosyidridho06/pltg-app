@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('penyulang_pembangkits', function (Blueprint $table) {
+        Schema::create('penyulang_pembangkit_details', function (Blueprint $table) {
             $table->id();
-            $table->string('parameter');
-            $table->string('satuan');
+            $table->string('nomor_dokumen')->unique();
+            $table->string('slug');
+            $table->date('tanggal_terbit');
+            $table->string('revisi')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penyulang_pembangkits');
+        Schema::dropIfExists('penyulang_pembangkit_details');
     }
 };

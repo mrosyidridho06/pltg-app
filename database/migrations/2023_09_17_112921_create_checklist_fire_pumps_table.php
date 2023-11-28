@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('checklist_fire_pumps', function (Blueprint $table) {
             $table->id();
+            $table->string('parameter');
             $table->timestamps();
         });
     }

@@ -91,7 +91,11 @@ class RolePermissionSeeder extends Seeder
 
         // this can be done as separate statements
         $role_regu = Role::create(['name' => 'regu']);
-        $role_regu->givePermissionTo('create logsheet');
+        $role_regu->givePermissionTo(['create logsheet', 'read logsheet', 'edit logsheet', 'delete logsheet',
+                                    'create checklist mesin', 'read checklist mesin', 'edit checklist mesin', 'delete checklist mesin',
+                                    'create document', 'read document', 'edit document', 'delete document',
+                                    'create beritaacara', 'read beritaacara', 'edit beritaacara', 'delete beritaacara'
+                                    ]);
 
         // or may be done by chaining
         $role_spv = Role::create(['name' => 'spv'])

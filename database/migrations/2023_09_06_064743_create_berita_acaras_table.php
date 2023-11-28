@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal');
             $table->time('jam');
-            $table->string('informasi', 255);
+            $table->longText('informasi');
             $table->foreignId('shift_id')->constrained('shifts')->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
