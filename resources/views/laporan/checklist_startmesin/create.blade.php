@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h4 mb-0 text-gray-800">Parameter Patrol Check</h1>
+        <h1 class="h4 mb-0 text-gray-800">Parameter Sebelum Start Mesin</h1>
         <div align="right" class="pt-1">
-            <a href="{{route('patrol-check.index')}}" class="btn btn-warning btn-xs"><i class="fa fa-arrow-left"></i> Kembali</a>
+            <a href="{{route('start.index')}}" class="btn btn-warning btn-xs"><i class="fa fa-arrow-left"></i> Kembali</a>
         </div>
     </div>
     <div class="card">
@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="parameter" class="form-label">Area</label>
+                                <label for="area" class="form-label">Area</label>
                                 <input type="text" name="area" class="form-control">
                             </div>
                         </div>
@@ -45,11 +45,11 @@
                     <th>Satuan</th>
                 </thead>
                 <tbody>
-                    @foreach ($ptk as $item)
+                    @foreach ($start as $item)
                     <tr>
                         <td>{{ $item->nomor }}</td>
-                        <td>{{ $item->parameter }}</td>
-                        <td>{{ $item->satuan }}</td>
+                        <td>{{ $item->area }}</td>
+                        <td>{{ $item->target }}</td>
                     </tr>
                     @endforeach
                 </tbody>

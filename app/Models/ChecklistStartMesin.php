@@ -16,4 +16,9 @@ class ChecklistStartMesin extends Model
                         'target',
                         'nomor'
                     ];
+
+    public function isiDetail()
+    {
+        return $this->hasMany(CheckListStartMesinIsiDetail::class);
+    }
 }

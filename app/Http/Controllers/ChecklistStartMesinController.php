@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ChecklistStartMesin;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\CheckListStartMesinDetail;
 use App\Models\CheckListStartMesinIsiDetail;
+use App\Models\CheckListStopMesinIsiDetail;
 
 class ChecklistStartMesinController extends Controller
 {
@@ -18,7 +20,7 @@ class ChecklistStartMesinController extends Controller
      */
     public function index()
     {
-        $start = ChecklistStartMesin::get();
+        $start = CheckListStartMesinDetail::get();
         return view('laporan.checklist_startmesin.index', compact('start'));
     }
 
@@ -49,8 +51,8 @@ class ChecklistStartMesinController extends Controller
 
         ChecklistStartMesin::create([
             'nomor' => $request->nomor,
-            'area' => $request->parameter,
-            'target' => $request->satuan,
+            'area' => $request->area,
+            'target' => $request->target,
         ]);
 
         Alert::toast('Data Berhasil Ditambah', 'success');
@@ -87,17 +89,41 @@ class ChecklistStartMesinController extends Controller
     {
 
         $request->validate([
-            'tanggal_terbit' => 'required',
-            'nomor_dokumen' => ['required', 'string'],
+            'ok.*' => 'required',
+            'not_ok.*' => 'required',
+            'keterangan.*' => 'nullable',
+            'checklist_id' => 'required',
+            'detail_id' => 'required',
         ]);
 
-        CheckListStartMesinIsiDetail::create([
-            'tanggal_terbit' => $request->tanggal_terbit,
-            'nomor_dokumen' => $request->nomor_dokumen,
-        ]);
+        $arr = $request->all();
+
+        $data = $arr['checklist_id'];
+        $ok = $arr['ok'];
+        $not = $arr['not_ok'];
+        $ket = $arr['keterangan'];
+        $isi = $arr['detail_id'];
+
+        $finalArray = array();
+        // dd($arr);
+        foreach($data as $key=>$item){
+            array_push($finalArray, array(
+                'ok'=> $ok[$key],
+                'not_ok'=> $not[$key],
+                'keterangan' => $ket[$key],
+                'detail_id' => $isi[$key],
+                'checklist_id' => $data[$key],
+                "created_at"=> Carbon::now(),
+                "updated_at"=> Carbon::now()
+                )
+            );
+        }
+        // dd($finalArray);
+
+        CheckListStartMesinIsiDetail::insert($finalArray);
 
         Alert::toast('Data Berhasil Ditambah', 'success');
-        return redirect()->back();
+        return redirect()->route('start.index');
     }
 
     /**
@@ -106,9 +132,22 @@ class ChecklistStartMesinController extends Controller
      * @param  \App\Models\ChecklistStartMesin  $checklistStartMesin
      * @return \Illuminate\Http\Response
      */
-    public function show(ChecklistStartMesin $checklistStartMesin)
+    public function show($slug)
     {
-        //
+        $start = ChecklistStartMesin::orderBy('nomor', 'asc')->get();
+        $startdetail = CheckListStartMesinDetail::where('nomor_dokumen', $slug)->first();
+        $isidetail = CheckListStartMesinIsiDetail::where('detail_id', $startdetail->id)->with('checklist', 'detail')->get();
+        // dd($start);
+
+        return view('laporan.checklist_startmesin.show', compact('start', 'startdetail', 'isidetail'));
+    }
+
+    public function isi($slug)
+    {
+        $start = ChecklistStartMesin::orderBy('nomor', 'asc')->get();
+        $startdetail = CheckListStartMesinDetail::where('nomor_dokumen', $slug)->first();
+
+        return view('laporan.checklist_startmesin.isi', compact('start', 'startdetail'));
     }
 
     /**

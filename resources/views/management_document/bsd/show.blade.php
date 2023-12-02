@@ -57,11 +57,24 @@
                                 @endforeach
                             </td>
                             <td>
+                                @if ($bsdisi->count() == 0)
                                 <input type="text" name="gangguan[]" class="form-control">
                                 <input type="hidden" name="isi_id[]" class="form-control" value="{{ $bsd->id }}">
+                                @endif
+                                @foreach ($bsdisi as $itembs)
+                                <input type="text" name="gangguan" class="form-control" value="{{ $itembs->gangguan }}">
+                                @endforeach
+                                {{-- <input type="text" name="gangguan[]" class="form-control">
+                                <input type="hidden" name="isi_id[]" class="form-control" value="{{ $bsd->id }}"> --}}
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="keterangan[]">
+                                @if ($bsdisi->count() == 0)
+                                <input type="text" name="keterangan[]" class="form-control">
+                                @endif
+                                @foreach ($bsdisi as $itembs)
+                                <input type="text" name="keterangan" class="form-control" value="{{ $itembs->siap_operasi }}">
+                                @endforeach
+                                {{-- <input type="text" class="form-control" name="keterangan[]"> --}}
                             </td>
                             <td>
                             </td>

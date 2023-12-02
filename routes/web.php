@@ -53,6 +53,9 @@ Route::middleware('auth')->group(function(){
     Route::resource('/laporan/logsheet-hmitm2', LogsheetHmitm2Controller::class);
     Route::resource('/laporan/logsheet', LogsheetController::class);
     Route::resource('/checklist-mesin/start', ChecklistStartMesinController::class);
+    Route::get('/isistart/{slug}', [ChecklistStartMesinController::class, 'isi'])->name('isistart');
+    Route::post('/startdetail', [ChecklistStartMesinController::class, 'storeDetail'])->name('startdetail');
+    Route::post('/startisi', [ChecklistStartMesinController::class, 'storeIsiDetail'])->name('startisi');
     Route::resource('/checklist-mesin/stop', ChecklistStopMesinController::class);
     Route::resource('/document/bsd', BlackStartDieselController::class);
     Route::post('/bsddetail', [BlackStartDieselController::class, 'storeDetail'])->name('bsddetail');

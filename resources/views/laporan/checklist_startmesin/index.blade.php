@@ -15,7 +15,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('start.store') }}" method="POST">
+                        <form action="{{ route('startdetail') }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -52,7 +52,7 @@
                         <th>No.</th>
                         <th>Nomor Dokumen</th>
                         <th>Tanggal Terbit</th>
-                        <th>Action</th>
+                        <th colspan="2">Action</th>
                     </thead>
                     <tbody>
                         @foreach ($start as $item)
@@ -60,7 +60,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->nomor_dokumen }}</td>
                             <td>{{ $item->tanggal_terbit }}</td>
-                            <td><a class="btn btn-primary button-sm" href="{{ route('isistart', $item->nomor_dokumen) }}" type="button" target="_blank" class="btn btn-primary"><i class="ti-eye"></i> View</a></td>
+                            <td><a class="btn btn-primary button-sm" href="{{ route('isistart', $item->nomor_dokumen) }}" type="button" target="_blank" class="btn btn-primary"><i class="ti-pencil"></i> Isi</a></td>
+                            <td><a class="btn btn-success button-sm" href="{{ route('start.show', $item->nomor_dokumen) }}" type="button" target="_blank" class="btn btn-primary"><i class="ti-eye"></i> View</a></td>
                         </tr>
                         @endforeach
                     </tbody>

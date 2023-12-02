@@ -9,7 +9,7 @@ class CheckListStartMesinDetail extends Model
 {
     use HasFactory;
 
-    protected $table = 'checklist_start_mesin_details';
+    protected $table = 'check_list_start_mesin_details';
 
     protected $fillable =
                         [
