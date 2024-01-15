@@ -55,9 +55,16 @@
                     <div class="col-md-12">
                         <div class="mb-3">
                             <label for="jenis_logsheet" class="form-label">Role</label>
+                            {{-- {{ $user->roles }} --}}
                             <select name="role" class="form-control">
                                 @foreach ($role as $item)
+                                @foreach ($user->roles as $idroles)
+                                @if ($idroles->id == $item->id)
+                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                                @endforeach
                                 @endforeach
                             </select>
                         </div>

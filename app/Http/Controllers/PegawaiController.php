@@ -94,7 +94,8 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::with('roles')->find($id);
+        // dd($user);
         $role = ModelsRole::all();
         return view('pegawai.edit', compact('user', 'role'));
     }

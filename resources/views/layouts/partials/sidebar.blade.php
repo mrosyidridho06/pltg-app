@@ -9,9 +9,11 @@
             <i class="ti-angle-right"></i>
         </a>
     </div> --}}
-    <div class="sidebar-header" id="wrapper">
-            <img src="{{ asset('assets/images/pln.png') }}" alt="">
-            <div class="text" style="font-size: 100%" >PLTG SAMBERA</div>
+    <div class="sidebar-header">
+        <img src="{{ asset('assets/images/pln.png') }}" alt="">
+        <span>PLTG SAMBERA</span>
+        {{-- <div class="link" >
+        </div> --}}
         <div class="close-sidebar action-toggle">
             <i class="ti-close"></i>
         </div>
@@ -96,9 +98,17 @@
                     <span>Master</span>
                 </a>
                 <ul class="sub-menu {{ request()->segment(1) == 'master' ? 'expand' : '' }}">
-                    <li class="{{ request()->segment(2) == 'shift' ? 'active' : '' }}"><a href="{{ route('shift.index') }}" class="link"><span>Shift</span></a></li>
-                    <li class="{{ request()->segment(2) == 'jenis-logsheet' ? 'active' : '' }}"><a href="{{ route('jenis-logsheet.index') }}" class="link"><span>Jenis Logsheet</span></a></li>
-                    <li class="{{ request()->segment(2) == 'parameter-logsheet' ? 'active' : '' }}"><a href="{{ route('parameter-logsheet.index') }}" class="link"><span>Parameter Logsheet</span></a></li>
+                    <li class="{{ request()->segment(3) == 'shift' ? 'active' : '' }}"><a href="{{ route('shift.index') }}" class="link"><span>Shift</span></a></li>
+                    <li class="{{ request()->segment(3) == 'create' ? 'active' : '' }}"><a href="{{ route('logsheet-hmitm1.create') }}" class="link"><span>Logsheet HMI TM1</span></a></li>
+                    <li class="{{ request()->segment(3) == 'create' ? 'active' : '' }}"><a href="{{ route('logsheet-hmitm2.create') }}" class="link"><span>Logsheet HMI TM2</span></a></li>
+                    <li class="{{ request()->segment(2) == 'patrol-check/create' ? 'active' : '' }}"><a href="{{ route('patrol-check.create') }}" class="link"><span>Checklist Patrol Check</span></a></li>
+                    <li class="{{ request()->segment(2) == 'start' ? 'active' : '' }}"><a href="{{ route('start.create') }}" class="link"><span>Checklist Mesin Start</span></a></li>
+                    <li class="{{ request()->segment(2) == 'stop' ? 'active' : '' }}"><a href="{{ route('stop.create') }}" class="link"><span>Checklist Mesin Stop</span></a></li>
+                    <li class="{{ request()->segment(2) == 'penyulang-pembangkit' ? 'active' : '' }}"><a href="{{ route('penyulang-pembangkit.create') }}" class="link"><span>Penyulang dan Pembangkit</span></a></li>
+                    <li class="{{ request()->segment(2) == 'bsd' ? 'active' : '' }}"><a href="{{ route('bsd.create') }}" class="link"><span>Black Start Diesel</span></a></li>
+                    <li class="{{ request()->segment(2) == 'firepump' ? 'active' : '' }}"><a href="{{ route('firepump.create') }}" class="link"><span>Firepump</span></a></li>
+                    {{-- <li class="{{ request()->segment(2) == 'jenis-logsheet' ? 'active' : '' }}"><a href="{{ route('jenis-logsheet.index') }}" class="link"><span>Jenis Logsheet</span></a></li>
+                    <li class="{{ request()->segment(2) == 'parameter-logsheet' ? 'active' : '' }}"><a href="{{ route('parameter-logsheet.index') }}" class="link"><span>Parameter Logsheet</span></a></li> --}}
                 </ul>
             </li>
             @endcan

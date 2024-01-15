@@ -21,11 +21,20 @@
                     <div class="mb-3">
                         <label for="permissions" class="form-label">Permissions</label>
                         @foreach ($roles->permissions as $item)
-                        <li>{{ $item->name }}</li>
-                        <input type="checkbox" name="" id="">
-                            {{-- <input type="checkbox" name="permissions" class="form-control" id="permissions"> --}}
+                        <input type="checkbox" name="permission" checked>{{ $item->name }}
                         @endforeach
                     </div>
+                    <span>
+                        @foreach ($permissions as $permission)
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="permission" value="{{ $permission->id }}"> {{ $permission->name }}
+                                </td>
+                            </tr>
+                        </table>
+                        @endforeach
+                    </span>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('penyulang-pembangkit.store') }}" method="POST">
+                        <form action="{{ route('penyulangdetail') }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -29,17 +29,6 @@
                                             <input type="text" name="nomor_dokumen" class="form-control" id="nomor_dokumen">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="Jenis Logsheet" class="form-label">Jenis Logsheet</label>
-                                            <select class="form-select mb-3" aria-label="Default select example" name="jenis_logsheet_id">
-                                                <option selected>Pilih Jenis Logsheet</option>
-                                                {{-- @foreach ($jl as $jenis_log)
-                                                    <option value="{{ $jenis_log->id }}">{{ $jenis_log->jenis_logsheet }}</option>
-                                                @endforeach --}}
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -52,7 +41,7 @@
             </div>
         </div>
     @endcan
-    {{-- <div class="content-wrapper">
+    <div class="content-wrapper">
         <div class="card">
             <div class="card-body">
                 <table class="table table-responsive">
@@ -60,22 +49,21 @@
                         <th>No.</th>
                         <th>Nomor Dokumen</th>
                         <th>Tanggal Terbit</th>
-                        <th>Jenis Logsheet</th>
-                        <th>Action</th>
+                        <th colspan="2">Action</th>
                     </thead>
                     <tbody>
-                        @foreach ($logsheets as $logsheet)
+                        @foreach ($penyulang as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $logsheet->nomor_dokumen }}</td>
-                            <td>{{ $logsheet->tanggal_terbit }}</td>
-                            <td>{{ $logsheet->jenisLogsheet->jenis_logsheet }}</td>
-                            <td><a class="button-sm" href="{{ route('logsheet.show', $logsheet->id) }}" type="button" target="_blank" class="btn btn-primary"><i class="ti-eye"></i> Print</a></td>
+                            <td>{{ $item->nomor_dokumen }}</td>
+                            <td>{{ $item->tanggal_terbit }}</td>
+                            <td><a class="btn btn-primary btn-sm" href="{{ route('isipenyulang', $item->nomor_dokumen) }}" type="button" target="_blank" class="btn btn-primary"><i class="ti-pencil"></i> Isi</a></td>
+                            <td><a class="btn btn-primary btn-sm" href="{{ route('penyulang-pembangkit.show', $item->nomor_dokumen) }}" type="button" target="_blank" class="btn btn-primary"><i class="ti-eye"></i> Lihat</a></td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection

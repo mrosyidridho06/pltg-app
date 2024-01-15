@@ -3,6 +3,7 @@
     <div class="title">
         Fire Pump
     </div>
+    <div class="content-wrapper">
     @can('create beritaacara')
     <button class="btn mb-3 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Tambah Data</button>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -13,7 +14,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('firepump.store') }}" method="POST">
+                        <form action="{{ route('firepumpdetail') }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -29,17 +30,6 @@
                                             <input type="text" name="nomor_dokumen" class="form-control" id="nomor_dokumen">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="Jenis Logsheet" class="form-label">Jenis Logsheet</label>
-                                            <select class="form-select mb-3" aria-label="Default select example" name="jenis_logsheet_id">
-                                                <option selected>Pilih Jenis Logsheet</option>
-                                                {{-- @foreach ($jl as $jenis_log)
-                                                    <option value="{{ $jenis_log->id }}">{{ $jenis_log->jenis_logsheet }}</option>
-                                                @endforeach --}}
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -52,7 +42,8 @@
             </div>
         </div>
     @endcan
-    {{-- <div class="content-wrapper">
+    </div>
+    <div class="content-wrapper">
         <div class="card">
             <div class="card-body">
                 <table class="table table-responsive">
@@ -60,22 +51,20 @@
                         <th>No.</th>
                         <th>Nomor Dokumen</th>
                         <th>Tanggal Terbit</th>
-                        <th>Jenis Logsheet</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
-                        @foreach ($logsheets as $logsheet)
+                        @foreach ($fire as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $logsheet->nomor_dokumen }}</td>
-                            <td>{{ $logsheet->tanggal_terbit }}</td>
-                            <td>{{ $logsheet->jenisLogsheet->jenis_logsheet }}</td>
-                            <td><a class="button-sm" href="{{ route('logsheet.show', $logsheet->id) }}" type="button" target="_blank" class="btn btn-primary"><i class="ti-eye"></i> Print</a></td>
+                            <td>{{ $item->nomor_dokumen }}</td>
+                            <td>{{ $item->tanggal_terbit }}</td>
+                            <td><a class="button-sm" href="{{ route('isifirepump', $item->id) }}" type="button" target="_blank" class="btn btn-primary"><i class="ti-eye"></i> Print</a></td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection
